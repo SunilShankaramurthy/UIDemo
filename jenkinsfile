@@ -11,11 +11,7 @@ pipeline {
                    sh "mvn test -Denv=nonprod -DBrowser=chrome -Dtestng.dtd.http=true"
             }
         }
-        stage('Packaging Stage') {
-             steps {
-                     sh "mvn package"
-             }
-        }
+
         stage('Result Stage') {
                      steps {
                             input("Do you want to capture the results?")
