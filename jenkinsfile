@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Testing Stage') {
             steps {
-                   sh "mvn test"
+                   sh "mvn test -Denv=nonprod -DBrowser=chrome -Dtestng.dtd.http=true"
             }
         }
         stage('Packaging Stage') {
