@@ -19,5 +19,10 @@ pipeline {
                             archive 'target/*.jar'
                      }
                 }
+        stage(' Email stage'){
+                    steps{
+                            mail bcc: '', body: 'Test console logs from jenkins', cc: '', from: '', replyTo: '', subject: 'Test console logs from jenkins', to: 'sunilshankarmurthy1@gmail.com'
+                    }
+        }
     }
 }
