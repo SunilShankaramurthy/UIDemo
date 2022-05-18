@@ -3,17 +3,17 @@ pipeline {
     stages {
         stage('Cleaning Stage') {
             steps {
-                    "mvn clean"
+                    mvn clean
             }
         }
         stage('Testing Stage') {
             steps {
-                    "mvn test"
+                    mvn test
             }
         }
         stage('Packaging Stage') {
              steps {
-                     "mvn package"
+                     mvn package
              }
         }
     }
