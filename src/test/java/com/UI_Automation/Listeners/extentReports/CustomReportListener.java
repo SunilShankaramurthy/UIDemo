@@ -1,8 +1,7 @@
 package com.UI_Automation.Listeners.extentReports;
 
 
-import com.UI_Automation.base.DriverFactory;
-import com.UI_Automation.stepdef.Hook;
+import com.UI_Automation.base.DriverManager;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -10,35 +9,23 @@ import com.aventstack.extentreports.gherkin.model.Given;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import io.cucumber.plugin.EventListener;
-import io.cucumber.plugin.event.EventPublisher;
-import io.cucumber.plugin.event.PickleStepTestStep;
-import io.cucumber.plugin.event.TestCaseStarted;
-import io.cucumber.plugin.event.TestRunFinished;
-import io.cucumber.plugin.event.TestRunStarted;
-import io.cucumber.plugin.event.TestSourceRead;
-import io.cucumber.plugin.event.TestStepFinished;
-import io.cucumber.plugin.event.TestStepStarted;
-import io.cucumber.plugin.event.HookTestStep;
+import io.cucumber.plugin.event.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class CustomReportListener extends DriverFactory implements EventListener {
-    private ExtentSparkReporter spark;
-    private ExtentReports extent;
-
-
+public class CustomReportListener extends DriverManager implements EventListener {
     Map<String, ExtentTest> feature = new HashMap<String, ExtentTest>();
     ExtentTest scenario;
     ExtentTest step;
-
+    private ExtentSparkReporter spark;
+    private ExtentReports extent;
 
     public void customReportListener() {
-    };
+    }
 
 
     @Override
@@ -59,7 +46,7 @@ public class CustomReportListener extends DriverFactory implements EventListener
         publisher.registerHandlerFor(TestStepFinished.class, this::stepFinished);
 
 
-    };
+    }
 
 
     /**
@@ -75,21 +62,20 @@ public class CustomReportListener extends DriverFactory implements EventListener
         extent = new ExtentReports();
         spark.config().setTheme(Theme.DARK);
         // Create extent report instance with spark reporter
-     //   try{
-          //  spark.loadXMLConfig(System.getProperty("user.dir")+"/scr/test/resources/spark-config.xml");
-       // }catch (IOException e){
-       //     e.printStackTrace();
-     //   }
+        //   try{
+        //  spark.loadXMLConfig(System.getProperty("user.dir")+"/scr/test/resources/spark-config.xml");
+        // }catch (IOException e){
+        //     e.printStackTrace();
+        //   }
         extent.attachReporter(spark);
-    };
-
+    }
 
 
     // TestRunFinished event is triggered when all feature file executions are
     // completed
     private void runFinished(TestRunFinished event) {
         extent.flush();
-    };
+    }
 
 
     // This event is triggered when feature file is read
@@ -104,7 +90,7 @@ public class CustomReportListener extends DriverFactory implements EventListener
 
             feature.putIfAbsent(featureSource, extent.createTest(featureName));
         }
-    };
+    }
 
 
     // This event is triggered when Test Case is started
@@ -115,7 +101,7 @@ public class CustomReportListener extends DriverFactory implements EventListener
 
 
         scenario = feature.get(featureName).createNode(event.getTestCase().getName());
-    };
+    }
 
 
     // step started event
@@ -145,7 +131,7 @@ public class CustomReportListener extends DriverFactory implements EventListener
 
 
         step = scenario.createNode(Given.class, keyword + " " + stepName);
-    };
+    }
 
 
     // This is triggered when TestStep is finished
@@ -156,10 +142,7 @@ public class CustomReportListener extends DriverFactory implements EventListener
             step.log(Status.PASS, "This passed");
 
 
-        } else if (event.getResult().getStatus().toString() == "SKIPPED")
-
-
-        {
+        } else if (event.getResult().getStatus().toString() == "SKIPPED") {
 
 
             step.log(Status.SKIP, "This step was skipped ");
@@ -169,12 +152,13 @@ public class CustomReportListener extends DriverFactory implements EventListener
             byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
 
-          //  scenario.attach( screenshot,"image/png", "screenshot");
-           // scenario.addScreenCaptureFromBase64String(screenshot,"image/png", "screenshot");
-           // scenario.
+            //  scenario.attach( screenshot,"image/png", "screenshot");
+            // scenario.addScreenCaptureFromBase64String(screenshot,"image/png", "screenshot");
+            // scenario.
         }
-    };
-    public String getScreenShot(){
+    }
+
+    public String getScreenShot() {
         return "data:image/png;base64," + ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
     }
 

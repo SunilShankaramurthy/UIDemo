@@ -81,49 +81,11 @@
                          <version>${maven-surfire.version}</version>
                          <configuration>
                              <suiteXmlFiles>
-                                 <!--suppress UnresolvedMavenProperty -->
+
                             <suiteXmlFile>testng.xml</suiteXmlFile>
-                             <!--<suiteXmlFile>${basedir}/target/surefire-reports/testng-failed.xml</suiteXmlFile>-->
                          </suiteXmlFiles>
-                         <properties>
-                             <property>
-                                 <name>parallel</name>
-                                 <value>methods</value>
-                             </property>
-                             <property>
-                                 <name>threadCount</name>
-                                 <!--suppress UnresolvedMavenProperty -->
-                                <value>${threadCount}</value>
-                            </property>
-                        </properties>
+
                     </configuration>
-                </plugin>
-
-                <plugin>
-
-
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>${maven-resources-plugin}</version>
-                    <executions>
-                        <execution>
-                            <id>copy-resources</id>
-                            <phase>install</phase>
-                            <goals>
-                                <goal>copy-resources</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>${basedir}/reports/</outputDirectory>
-                                <resources>
-                                    <resource>
-                                        <directory>${basedir}/target/surefire-reports</directory>
-                                        <includes>
-                                            <include>testng-failed.xml</include>
-                                        </includes>
-                                    </resource>
-                                </resources>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
