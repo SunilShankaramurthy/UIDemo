@@ -35,10 +35,8 @@ public class Products extends BasePage {
     public CartPage selectRandomProducts() throws Exception {
         List invList = driver.findElements(By.xpath("//button[text()='Add to cart']"));
         Random random = new Random();
-        int randomItemToSelect = random.nextInt(invList.size());
-        System.out.println(invList.size());
-        System.out.println(randomItemToSelect);
-        for (int i = 1; i <= 3; i++) {
+        int randomItemToSelect = random.nextInt((invList.size())+1);
+        for (int i = 1; i <= randomItemToSelect; i++) {
             driver.findElement(By.xpath("//div[contains(@class,'inventory_item')][" + i + "]/div[2]/div[2]/button")).click();
         }
 
