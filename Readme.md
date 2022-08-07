@@ -8,7 +8,7 @@
 
 ## Description
    This project contains BDD automation with TestNG-Cucumber framework written in Java selenium using Page Object Model. This is a ready to use framework 
-built to achieve crossbrowser, parallel run and failed scenarios run. Users can add cucumber feature files and stepdefs directly.
+built to achieve  parallel run and failed scenarios run. Users can add cucumber feature files and stepdefs directly.
 ## Architecture
     This is a Maven project developed using Java Selenium and TestNG.
 - Maven take cares of dependency jars and plugins.
@@ -22,16 +22,14 @@ built to achieve crossbrowser, parallel run and failed scenarios run. Users can 
   geekodriver(Firefox driver)( version should be same as the system browser)
   
 ## Run-Command
-  1. To run the Test on Non-Prod<br/>
-      mvn clean install -Denv=nonprod -DBrowser=chrome -Dtestng.dtd.http=true <br/>
+  1. To run the Test in headless mode<br/>
+      mvn clean install -DBrowser=chrome -Dheadless=true -Dtestng.dtd.http=true <br/>
       
-  2.  To run the test on Pre-Prod<br/>
-      mvn clean install -Denv=preprod -DBrowser=chrome -Dtestng.dtd.http=true<br/>
+  2.  To run the test in head mode<br/>
+      mvn clean install -DBrowser=chrome -Dheadless=false -Dtestng.dtd.http=true<br/>
       
       ** threadCount is used for parallel running. And we have to set this count in TestNG.xml file. As of now ThreadCount=3.
-      ** As of now this code will run only on Chrome with nonprod.
-      ** If we don't provide the Browser value then by default chrome will be selected.
-      ** For parallel run with multi user, we can provide the threadcount value in TestNG.xml file present in project folder
+      ** As of now this code will run only on Chrome.
       
 ## Report
    The framework will generate 4 types of test reports with screenshot and error details of failed scenarios.<br/>
@@ -41,13 +39,5 @@ built to achieve crossbrowser, parallel run and failed scenarios run. Users can 
       
       **The below reports provide screenshot with error details for the failed scenarios.
       
-   2. Spark Report <br/>
-      Path :project.dir/test-output/spark/SparkReport.html<br/>
-      <br/>
-      
-   3. Extent pdf Report <br/>
-      Path :project.dir/test-output/PdfReport/ExtentPDFReport.pdf<br/>
-      <br/>
-      
-   4. Cucumber Report : This report provide screenshot with error details for the failed scenarios<br/>
-      path : project.dir/target/cucumber-reports.html
+   2. Cucumber Report : This report provide screenshot with error details for the failed scenarios<br/>
+      path : project.dir/reports/cucumber-reports.html
