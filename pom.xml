@@ -9,9 +9,9 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <selenium-java.version>4.0.0</selenium-java.version>
-        <cucumber-java.version>6.7.0</cucumber-java.version>
-        <cucumber-testng.version>6.7.0</cucumber-testng.version>
+        <selenium-java.version>4.3.0</selenium-java.version>
+        <cucumber-java.version>7.5.0</cucumber-java.version>
+        <cucumber-testng.version>7.5.0</cucumber-testng.version>
         <extentreports>5.0.8</extentreports>
         <cucumber-extentsreport>3.1.1</cucumber-extentsreport>
 
@@ -39,8 +39,16 @@
                  <artifactId>selenium-java</artifactId>
                  <version>${selenium-java.version}</version>
              </dependency>
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.5</version>
+            <scope>test</scope>
+        </dependency>
 
-             <dependency>
+
+        <dependency>
                  <groupId>com.aventstack</groupId>
                  <artifactId>extentreports</artifactId>
                  <version>${extentreports}</version>

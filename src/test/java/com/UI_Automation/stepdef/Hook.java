@@ -48,6 +48,6 @@ public class Hook {
 
     @After
     public void AfterScenario() {
-        driver.close();
+        driver.quit();
     }
 }

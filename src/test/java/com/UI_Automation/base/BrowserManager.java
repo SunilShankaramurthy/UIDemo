@@ -4,6 +4,8 @@ package com.UI_Automation.base;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.nio.file.Paths;
 
@@ -16,7 +18,7 @@ public class BrowserManager {
         WebDriver driver = null;
         if (browserName.equalsIgnoreCase("Chrome")) //Chrome browser
         {
-            String chromePath = Paths.get("src", "test", "resources", "chromedriver").toString();
+            String chromePath = Paths.get("src", "test", "resources", "drivers","chromedriver").toString();
             System.setProperty("webdriver.chrome.driver", chromePath);
             ChromeOptions opt = new ChromeOptions();
             opt.setHeadless(Boolean.parseBoolean(System.getProperty("headless")));
@@ -24,7 +26,12 @@ public class BrowserManager {
 
         } else if (browserName.equalsIgnoreCase("Firefox"))  // Firefox browser
         {
-            //Yet to implement
+            String firefoxPath = Paths.get("src", "test", "resources", "drivers","geckodriver").toString();
+            System.setProperty("webdriver.gecko.driver", firefoxPath);
+            FirefoxOptions opt = new FirefoxOptions();
+            opt.setHeadless(Boolean.parseBoolean(System.getProperty("headless")));
+            opt.setAcceptInsecureCerts(true);
+            driver = new FirefoxDriver(opt);
         }
         return driver;
     }
